@@ -1,0 +1,614 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: 'http://localhost:8080'
+    description: Generated server url
+paths:
+  '/api/v1/timelines/{noteId}':
+    post:
+      tags:
+        - tasting-timeline-controller
+      operationId: createTimeline
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TastingTimelineRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingTimelineResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/notes:
+    post:
+      tags:
+        - tasting-note-controller
+      operationId: createNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TastingNoteRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingNoteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/auth/signup:
+    post:
+      tags:
+        - auth-controller
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/auth/signin:
+    post:
+      tags:
+        - auth-controller
+      operationId: authenticateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/auth/refreshtoken:
+    post:
+      tags:
+        - auth-controller
+      operationId: refreshtoken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  '/api/v1/timelines/{timelineId}':
+    get:
+      tags:
+        - tasting-timeline-controller
+      operationId: getTimeline
+      parameters:
+        - name: timelineId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingTimelineResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      tags:
+        - tasting-timeline-controller
+      operationId: deleteTimeline
+      parameters:
+        - name: timelineId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    patch:
+      tags:
+        - tasting-timeline-controller
+      operationId: updateTimeline
+      parameters:
+        - name: timelineId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TastingTimelineRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingTimelineResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  '/api/v1/notes/{noteId}':
+    get:
+      tags:
+        - tasting-note-controller
+      operationId: getNote
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingNoteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      tags:
+        - tasting-note-controller
+      operationId: deleteNote
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    patch:
+      tags:
+        - tasting-note-controller
+      operationId: updateNote
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TastingNoteRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TastingNoteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  '/api/v1/timelines/note/{noteId}':
+    get:
+      tags:
+        - tasting-timeline-controller
+      operationId: getTimelinesByNote
+      parameters:
+        - name: noteId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TastingTimelineResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/notes/my:
+    get:
+      tags:
+        - tasting-note-controller
+      operationId: getMyNotes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TastingNoteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/notes/by-wine:
+    get:
+      tags:
+        - tasting-note-controller
+      operationId: searchNotesByWine
+      parameters:
+        - name: wineId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TastingNoteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /api/v1/notes/autocomplete:
+    get:
+      tags:
+        - tasting-note-controller
+      operationId: autoComplete
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WineAutoCompleteResponse'
+        '403':
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+components:
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        description:
+          type: string
+    TastingTimelineRequest:
+      type: object
+      properties:
+        tastedDate:
+          type: string
+          format: date-time
+        rating:
+          type: integer
+          format: int32
+        sweetness:
+          type: integer
+          format: int32
+        acidity:
+          type: integer
+          format: int32
+        body:
+          type: integer
+          format: int32
+        tannin:
+          type: integer
+          format: int32
+        memo:
+          type: string
+        aromaTagIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    AromaTagResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        category:
+          type: string
+    TastingTimelineResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdDate:
+          type: string
+          format: date-time
+        tastedDate:
+          type: string
+          format: date-time
+        rating:
+          type: integer
+          format: int32
+        sweetness:
+          type: integer
+          format: int32
+        acidity:
+          type: integer
+          format: int32
+        body:
+          type: integer
+          format: int32
+        tannin:
+          type: integer
+          format: int32
+        memo:
+          type: string
+        aromaTags:
+          type: array
+          items:
+            $ref: '#/components/schemas/AromaTagResponse'
+    TastingNoteRequest:
+      type: object
+      properties:
+        isPublic:
+          type: boolean
+        openedDate:
+          type: string
+          format: date-time
+        wineName:
+          type: string
+          maxLength: 50
+          minLength: 0
+        wineTypeEnum:
+          type: string
+          enum:
+            - TYPE_RED
+            - TYPE_WHITE
+            - TYPE_ROSE
+            - TYPE_SPARKLING
+            - TYPE_DESSERT
+        variety:
+          type: string
+        vintage:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        country:
+          type: string
+        region:
+          type: string
+        color:
+          type: string
+        blending:
+          type: boolean
+        overallRating:
+          type: integer
+          format: int32
+        memo:
+          type: string
+          maxLength: 2000
+          minLength: 0
+        imageUrl:
+          type: string
+      required:
+        - isPublic
+    TastingNoteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        isPublic:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        openedDate:
+          type: string
+          format: date-time
+        wineName:
+          type: string
+        wineType:
+          type: string
+        variety:
+          type: string
+        vintage:
+          type: integer
+          format: int32
+        price:
+          type: integer
+          format: int32
+        country:
+          type: string
+        region:
+          type: string
+        color:
+          type: string
+        overallRating:
+          type: integer
+          format: int32
+        memo:
+          type: string
+        imageUrl:
+          type: string
+        timelines:
+          type: array
+          items:
+            $ref: '#/components/schemas/TastingTimelineResponse'
+    SignupRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 20
+          minLength: 3
+        email:
+          type: string
+          format: email
+          maxLength: 50
+          minLength: 0
+        role:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        password:
+          type: string
+          maxLength: 40
+          minLength: 6
+      required:
+        - email
+        - password
+        - username
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+      required:
+        - password
+        - username
+    TokenRefreshRequest:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          minLength: 1
+      required:
+        - refreshToken
+    WineAutoCompleteResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
